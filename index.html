@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>PokeApi</title>
+</head>
+<body>
+    <div class="opacity">
+        <div class="container">
+
+            <div class="container-center">
+                <h1>PokeApi</h1>
+                <section id = "img-name" >
+                
+                </section>
+                <div class="button">
+                    <button onclick="Pokemonrandom()">Pokemon</button>
+                </div>
+                <section class ="stats-pokemon">
+                    <p id="namepokemon"></p>
+                    <ul id="stats-list">
+                    </ul>
+                </section>
+            </div>
+        </div>
+
+        <div class="container form">
+            <h2 id="TitleTeam">Equipo Pokemon</h2>
+
+            <div class="formpokemon">
+                    <h2>Elige tu equipo</h3> 
+                    <input type="text" placeholder="Introduce el nombre o ID del Pokémon" id="pokemonInput">
+                    <div class="button-container">
+                        <button onclick="EquipoPokemon()">Buscar</button>
+                    </div>
+            </div>
+
+        </div>
+        
+        <section class="container-cards">
+
+        </section>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        
+       
+        async function islegendary(pokemonName) {
+                try {
+                    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${pokemonName}`);
+                    const data = response.data;
+                    const isLegendary = data.is_legendary;
+                    return isLegendary;
+                }
+                catch (error) {
+                    console.log(error);
+                }
+            }
+        var listTeam = [];
+        async function EquipoPokemon() {
+                try {
+                    var prob = Math.floor(Math.random() * 100);
+                    var pokemon = document.getElementById('pokemonInput').value.toLowerCase();
+                    const response = await axios.get('https://pokeapi.co/api/v2/pokemon/' + pokemon);
+                    const name = response.data.name;
+                    const image = prob === 1 ? response.data.sprites.front_shiny : response.data.sprites.front_default;
+                    const typepokemon = response.data.types;
+                    const stats = response.data.stats;
+
+
+                    if (listTeam.length < 6) {
+                        const container = document.querySelector('.container-cards');
+                        const newCard = document.createElement('div');
+                        newCard.classList.add('card');
+
+                        const deleteButton = document.createElement('button');
+                        deleteButton.classList.add('button', 'DeleteButton');
+                        deleteButton.textContent = 'x';
+                        deleteButton.onclick = function () { DeleteCard(this); };
+                        newCard.appendChild(deleteButton);
+
+                        const h2 = document.createElement('h2');
+                        h2.textContent = name;
+                        newCard.appendChild(h2);
+
+                        const imgSection = document.createElement('div');
+                        imgSection.id = 'imageteam';
+                        const img = document.createElement('img');
+                        img.setAttribute('src', image);
+                        img.setAttribute('alt', name);
+                        img.setAttribute('title', name);
+                        imgSection.appendChild(img);
+                        newCard.appendChild(imgSection);
+                        const description = document.createElement('div');
+                        description.classList.add('descriptionteam');
+                        const ul = document.createElement('ul');
+                        ul.id = 'description-pokemon';
+
+                        // Añadir el tipo del Pokémon
+                        if (typepokemon.length === 1) {
+                            ul.appendChild(document.createElement('li')).textContent = 'Type: ' + typepokemon[0].type.name;
+                        } else {
+                            ul.appendChild(document.createElement('li')).textContent = 'Types: ' + typepokemon[0].type.name + ' / ' + typepokemon[1].type.name;
+                        }
+
+
+                        stats.forEach(function (stat) {
+                            const li = document.createElement('li');
+                            li.textContent = stat.stat.name + ': ' + stat.base_stat;
+                            ul.appendChild(li);
+                        });
+
+                        description.appendChild(ul);
+                        newCard.appendChild(description);
+
+                        container.appendChild(newCard);
+
+                        listTeam.push(name);
+                    } else {
+                        alert('Ya tienes tu equipo completo');
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        function DeleteCard(button) {
+            try{
+                const card = button.closest('.card');
+                const name = card.querySelector('h2').textContent;
+                const index = listTeam.indexOf(name);
+
+                if (index !== -1) {
+                    listTeam.splice(index, 1);
+                    card.remove();
+                } 
+            }
+            catch (error) {
+                    console.log(error);
+                }
+            }
+
+        async function Pokemonrandom() {
+                var randomnumber = Math.floor(Math.random() * 1000) + 1;
+                var prob = Math.floor(Math.random() * 1000);
+                try {
+                    const response = await axios.get('https://pokeapi.co/api/v2/pokemon/' + randomnumber);
+                    const pokemon = response.data;
+                    const image = prob === 1 ? pokemon.sprites.front_shiny : pokemon.sprites.front_default;
+                    const name = pokemon.name;
+                    const stats = pokemon.stats;
+                    const isLegendary = await islegendary(name);
+                    const imgSection = document.getElementById('img-name');
+                    const statsList = document.getElementById('stats-list');
+                    const namepokemon = document.getElementById('namepokemon');
+                    const img = document.createElement('img');
+
+                    imgSection.innerHTML = '';
+                    statsList.innerHTML = '';
+
+                    namepokemon.className = isLegendary ? 'legendary' : 'not-legendary';
+                    namepokemon.textContent = name;
+                    imgSection.className = prob === 1 ? 'shiny' : 'not-shiny';
+
+
+                    stats.forEach(function (stat) {
+                        const li = document.createElement('li');
+                        li.textContent = stat.stat.name + ': ' + stat.base_stat;
+                        statsList.appendChild(li);
+                    });
+
+                    img.setAttribute('src', image);
+                    img.setAttribute('alt', name);
+                    imgSection.appendChild(img);
+
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+    </script>
+</body>
+</html>

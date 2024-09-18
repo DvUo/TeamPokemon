@@ -1,0 +1,318 @@
+@import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap");
+
+html, body {
+
+  height: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Pixelify Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+body {
+  background-image: url('PuebloPaleta.jpg');
+  background-attachment: fixed;
+  background-position: center;
+}
+.opacity{
+  background-color: #0008;
+  backdrop-filter: blur(2px); 
+}
+.container {
+  padding: 5em 25em 0 25em;
+  margin: 20px;
+}
+#TitleTeam{
+  margin-bottom: 20px;
+  font-size: 28px;
+  border: 2px;
+  border-color: #fff;
+  display: flex;
+  justify-content: center;
+}
+.form {
+  color:#fff;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background: linear-gradient(to bottom,#0006,#0376);
+  margin:0 20em;
+  padding: 2em ;
+  border-radius: 20px;
+}
+.form input {
+  margin: 10px 0;
+  padding:4px 0;
+  font-size: 18px;
+  width: 100%; 
+  border-radius:7px;
+}
+.inputbox{
+  margin: 1em 25em;
+
+}
+.button-container{
+  display:flex;
+  justify-content: flex-end;
+  margin-top:5px;
+  box-sizing: border-box;
+}
+
+.container-cards{
+  padding:5em 10em;
+  margin: 20px;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(150px,1fr)); 
+  justify-content: center; 
+  align-items: center;
+  color: #fff;
+}
+
+.card{
+  height: 380px;
+  width: 200px;
+  padding:20px;
+  background: linear-gradient(to bottom,#0006,#0376);
+  display:flex;
+  border-radius: 20px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin:0 5px 5px 5px;
+}
+.descriptionteam{
+  height: 70%;
+  width: 100%;
+  border-top: 1px solid #000c;
+}
+.container-center h1 {
+  font-size: 35px;
+  text-align: center;
+  animation: colortitle 3s ease-in-out infinite;
+  background: linear-gradient(
+       90deg,
+      #026, 
+      #029, 
+      #049, 
+      #068, 
+      #06a, 
+      #07b,
+      #08c, 
+      #09d, 
+      #0bf   
+);
+  background-size: 200% 200%;
+  background-clip: text;
+  color: transparent;
+}
+
+#description-pokemon li{
+  padding:4px 0 0 4px;
+  letter-spacing: 2px;
+  list-style: none;
+}
+.container-center {
+  height: 400px;
+  width: auto;
+  background: linear-gradient(to bottom,#000c,#0376);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
+  border-width: 3px;
+  border-style: solid;
+  animation: borderblue 5s linear infinite;
+  border-image-slice: 1;
+}
+img{
+    padding: 10px;
+    margin:5px;
+    width: auto;
+    height:130px;
+}
+
+.shiny img{
+
+    animation: bordershiny 2s ease-in-out infinite;
+
+}
+
+button {
+  background-color: #058;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  border-width: 0;
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+}
+button:hover {
+  background-color: #06b;
+  box-shadow: #0ff;
+  animation: buttonpulse ease-in-out;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+.DeleteButton{
+  padding:0 4px;
+  margin:0;
+}
+.stats-pokemon {
+  padding: 20px 0;
+  border-width: 50px;
+  border-color: aqua;
+}
+.stats-pokemon ul li {
+  display: inline;
+  color:#fff;
+  padding: 0 10px;
+  font-size: 1.1em;
+  list-style: none;
+}
+#namepokemon {
+  font-size: 20px;
+}
+.legendary {
+  padding-bottom:10px;
+  animation: legendary 5s ease-in-out infinite;
+  background: linear-gradient(90deg,#ff0000,#ffd900,#00ff15,#05ffff,#001aff,#c300ff,#ff0062,#ff0000);  
+  background-size: 200% 200%;
+  background-clip:text ;
+  color: transparent;  
+}
+.not-legendary{
+    padding-bottom:10px;
+    color:#fff;
+}
+
+@keyframes bordershiny{
+   0%{height: 120px;}
+   50%{height: 150px;}
+   100%{height: 120px;}
+}
+@keyframes legendary {
+  0% { background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes borderblue {
+  0% {
+    border-image-source: linear-gradient(
+      to top,
+      #024, 
+      #056, 
+      #066, 
+      #068, 
+      #069, 
+      #07a,
+      #07c, 
+      #09d, 
+      #0bf  
+    );
+    border-radius: 10px;
+  }
+
+  50% {
+    border-image-source: linear-gradient(
+      to top,
+      #0bf,
+      #09d, 
+      #07c,
+      #07a,
+      #069,
+      #068,
+      #066, 
+      #056,
+      #024    
+
+    );
+    border-radius: 10px;
+  }
+
+  100% {
+    border-image-source: linear-gradient(
+      to top,
+      #024, 
+      #056, 
+      #066, 
+      #068, 
+      #069, 
+      #07a,
+      #07c, 
+      #09d, 
+      #0bf   
+    );
+    border-radius: 10px;
+  }
+}
+@keyframes buttonpulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 5px 5px 30px #00f4;
+  }
+  10% {
+    transform: scale(1.05);
+    box-shadow: 5px 5px 10px #00f4;
+  }
+  20% {
+    transform: scale(1);
+    box-shadow: 5px 5px 30px #00f4;
+  }
+  30% {
+    transform: scale(1.05);
+    box-shadow: 5px 5px 10px #00f4;
+  }
+  40% {
+    transform: scale(1);
+    box-shadow: 5px 5px 30px #00f4;
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 5px 5px 10px #00f4;
+  }
+  60% {
+    transform: scale(1);
+    box-shadow: 5px 5px 30px #00f4;
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 5px 5px 10px #00f4;
+  }
+  80% {
+    transform: scale(1);
+    box-shadow: 5px 5px 30px #00f4;
+  }
+  90% {
+    transform: scale(1.05);
+    box-shadow: 5px 5px 10px #00f4;
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 5px 5px 30px #00f4;
+  }
+}
+@keyframes colortitle {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+ 
