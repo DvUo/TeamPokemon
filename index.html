@@ -68,6 +68,8 @@
                     const image = prob === 1 ? response.data.sprites.front_shiny : response.data.sprites.front_default;
                     const typepokemon = response.data.types;
                     const stats = response.data.stats;
+                    document.getElementById("pokemonInput").value = "";
+                   
 
 
                     if (listTeam.length < 6) {
