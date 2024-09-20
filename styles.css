@@ -315,4 +315,63 @@ button:hover {
     background-position: 0% 50%;
   }
 }
- 
+
+@media (max-width: 768px) {
+  .container {
+    padding: 2em;
+    margin: 10px;
+  }
+
+  #TitleTeam {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .form {
+    margin: 0 10px;
+    padding: 1em;
+  }
+
+  .container-cards {
+    padding: 2em;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card {
+    height: 300px;
+    width: 180px;
+  }
+
+  .container-center h1 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1em;
+  }
+
+  .form {
+    margin: 0 5px;
+  }
+
+  .container-cards {
+    padding: 1em;
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    height: 250px;
+    width: 150px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .container-center h1 {
+    font-size: 18px;
+  }
+}
