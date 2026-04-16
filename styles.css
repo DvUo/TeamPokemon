@@ -1,377 +1,642 @@
 @import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap");
 
-html, body {
+/* =============================================
+   CSS Variables for Consistent Styling
+   ============================================= */
+:root {
+    --primary-dark: #003;
+    --primary-blue: #037;
+    --accent-blue: #06b;
+    --text-white: #fff;
+    --border-radius-lg: 20px;
+    --border-radius-md: 10px;
+    --border-radius-sm: 5px;
+    --transition-speed: 0.3s;
+    --glow-blue: 0 0 20px rgba(0, 102, 255, 0.6);
+    --glow-cyan: 0 0 20px rgba(0, 255, 255, 0.6);
+    --glow-purple: 0 0 20px rgba(195, 0, 255, 0.6);
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+}
 
-  height: 100%;
+/* =============================================
+   Reset and Base Styles
+   ============================================= */
+html,
+body {
+    height: 100%;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  font-family: "Pixelify Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
+    margin: 0;
+    padding: 0;
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    box-sizing: border-box;
 }
+
 body {
-  background-image: url('PuebloPaleta.jpg');
-  background-attachment: fixed;
-  background-position: center;
+    background-image: 
+        linear-gradient(rgba(0, 0, 50, 0.3), rgba(0, 0, 50, 0.3)),
+        url('PuebloPaleta.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    animation: bgPulse 20s ease-in-out infinite;
 }
-.opacity{
-  background-color: #0008;
-  backdrop-filter: blur(2px); 
+
+@keyframes bgPulse {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.1); }
 }
+
+/* =============================================
+   Layout Containers
+   ============================================= */
+.opacity {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px) saturate(1.2);
+    min-height: 100vh;
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
+}
+
 .container {
-  padding: 5em 25em 0 25em;
-  margin: 20px;
-}
-#TitleTeam{
-  margin-bottom: 20px;
-  font-size: 28px;
-  border: 2px;
-  border-color: #fff;
-  display: flex;
-  justify-content: center;
-}
-.form {
-  color:#fff;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  background: linear-gradient(to bottom,#0006,#0376);
-  margin:0 20em;
-  padding: 2em ;
-  border-radius: 20px;
-}
-.form input {
-  margin: 10px 0;
-  padding:4px 0;
-  font-size: 18px;
-  width: 100%; 
-  border-radius:7px;
-}
-.inputbox{
-  margin: 1em 25em;
-
-}
-.button-container{
-  display:flex;
-  justify-content: flex-end;
-  margin-top:5px;
-  box-sizing: border-box;
+    padding: 5em 25em;
+    margin: 20px;
 }
 
-.container-cards{
-  padding:5em 10em;
-  margin: 20px;
-  display: grid;
-  grid-template-columns: repeat(6, minmax(150px,1fr)); 
-  justify-content: center; 
-  align-items: center;
-  color: #fff;
-}
-
-.card{
-  height: 380px;
-  width: 200px;
-  padding:20px;
-  background: linear-gradient(to bottom,#0006,#0376);
-  display:flex;
-  border-radius: 20px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin:0 5px 5px 5px;
-}
-.descriptionteam{
-  height: 70%;
-  width: 100%;
-  border-top: 1px solid #000c;
-}
-.container-center h1 {
-  font-size: 35px;
-  text-align: center;
-  animation: colortitle 3s ease-in-out infinite;
-  background: linear-gradient(
-       90deg,
-      #026, 
-      #029, 
-      #049, 
-      #068, 
-      #06a, 
-      #07b,
-      #08c, 
-      #09d, 
-      #0bf   
-);
-  background-size: 200% 200%;
-  background-clip: text;
-  color: transparent;
-}
-
-#description-pokemon li{
-  padding:4px 0 0 4px;
-  letter-spacing: 2px;
-  list-style: none;
-}
 .container-center {
-  height: 400px;
-  width: auto;
-  background: linear-gradient(to bottom,#000c,#0376);
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  border-radius: 10px;
-  border-width: 3px;
-  border-style: solid;
-  animation: borderblue 5s linear infinite;
-  border-image-slice: 1;
-}
-img{
-    padding: 10px;
-    margin:5px;
+    height: 400px;
     width: auto;
-    height:130px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 51, 102, 0.9), rgba(0, 102, 204, 0.8));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: var(--border-radius-lg);
+    border: 3px solid transparent;
+    border-image-slice: 1;
+    animation: borderblue 5s linear infinite, cardFloat 6s ease-in-out infinite;
+    box-shadow: var(--card-shadow), var(--glow-blue);
+    position: relative;
+    overflow: hidden;
 }
 
-.shiny img{
-
-    animation: bordershiny 2s ease-in-out infinite;
-
+.container-center::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(0, 150, 255, 0.1) 50%,
+        transparent 70%
+    );
+    animation: shimmer 3s linear infinite;
+    pointer-events: none;
 }
 
+@keyframes shimmer {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+@keyframes cardFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* =============================================
+   Typography
+   ============================================= */
+h1 {
+    font-size: 35px;
+    text-align: center;
+    animation: colortitle 3s ease-in-out infinite, textGlow 2s ease-in-out infinite alternate;
+    background: linear-gradient(
+        90deg,
+        #026, #029, #049, #068, #06a, #07b, #08c, #09d, #0bf
+    );
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 30px rgba(0, 153, 255, 0.5);
+    letter-spacing: 2px;
+}
+
+@keyframes textGlow {
+    from { text-shadow: 0 0 20px rgba(0, 153, 255, 0.3), 0 0 30px rgba(0, 153, 255, 0.2); }
+    to { text-shadow: 0 0 30px rgba(0, 153, 255, 0.6), 0 0 40px rgba(0, 153, 255, 0.4), 0 0 50px rgba(0, 153, 255, 0.2); }
+}
+
+#TitleTeam {
+    margin-bottom: 20px;
+    font-size: 28px;
+    border: 2px solid var(--text-white);
+    display: flex;
+    justify-content: center;
+    padding: 10px 30px;
+    background: linear-gradient(135deg, rgba(0, 102, 204, 0.3), rgba(0, 51, 102, 0.5));
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(0, 153, 255, 0.2);
+    backdrop-filter: blur(5px);
+    animation: titlePulse 3s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+    0%, 100% { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(0, 153, 255, 0.2); }
+    50% { box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4), inset 0 0 30px rgba(0, 153, 255, 0.4); }
+}
+
+.form h3 {
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+/* =============================================
+   Form Section
+   ============================================= */
+.form {
+    color: var(--text-white);
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 51, 102, 0.8), rgba(0, 102, 204, 0.6));
+    margin: 0 20em;
+    padding: 2em;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--card-shadow), 0 0 30px rgba(0, 102, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.form:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-shadow), 0 0 40px rgba(0, 153, 255, 0.5);
+}
+
+.form input {
+    margin: 10px 0;
+    padding: 12px 16px;
+    font-size: 18px;
+    width: 100%;
+    border-radius: var(--border-radius-md);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-white);
+    transition: all var(--transition-speed) ease;
+    backdrop-filter: blur(5px);
+}
+
+.form input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    transition: color var(--transition-speed) ease;
+}
+
+.form input:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 153, 255, 0.4), inset 0 0 10px rgba(0, 153, 255, 0.1);
+    transform: scale(1.02);
+}
+
+.form input:focus::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.inputbox {
+    margin: 1em 25em;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5px;
+}
+
+/* =============================================
+   Team Cards Grid
+   ============================================= */
+.container-cards {
+    padding: 5em 10em;
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(150px, 1fr));
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-white);
+}
+
+.card {
+    height: 380px;
+    width: 200px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 51, 102, 0.9), rgba(0, 102, 204, 0.7));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px 5px;
+    border-radius: var(--border-radius-lg);
+    position: relative;
+    box-shadow: var(--card-shadow), 0 0 20px rgba(0, 102, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    transition: all var(--transition-speed) ease;
+    animation: cardEntrance 0.6s ease-out;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.card:hover::before {
+    left: 100%;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: var(--card-shadow), 0 0 40px rgba(0, 153, 255, 0.6), var(--glow-cyan);
+    border-color: rgba(0, 255, 255, 0.5);
+}
+
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.descriptionteam {
+    height: 70%;
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, 0.5);
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+#description-pokemon li {
+    padding: 4px 0 0 4px;
+    letter-spacing: 2px;
+    list-style: none;
+    font-size: 14px;
+}
+
+/* =============================================
+   Images
+   ============================================= */
+img {
+    padding: 10px;
+    margin: 5px;
+    width: auto;
+    height: 130px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+    transition: all var(--transition-speed) ease;
+}
+
+.card:hover img {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 8px 16px rgba(0, 153, 255, 0.5));
+}
+
+.shiny img {
+    animation: bordershiny 2s ease-in-out infinite, shinySparkle 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes shinySparkle {
+    from { 
+        filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)) brightness(1);
+    }
+    to { 
+        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)) brightness(1.1);
+    }
+}
+
+/* =============================================
+   Buttons
+   ============================================= */
 button {
-  background-color: #058;
-  color: #fff;
-  padding: 5px;
-  border-radius: 5px;
-  border-width: 0;
-  font-size: 16px;
-  padding: 10px 20px;
-  cursor: pointer;
-  border: none;
-}
-button:hover {
-  background-color: #06b;
-  box-shadow: #0ff;
-  animation: buttonpulse ease-in-out;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-}
-.DeleteButton{
-  padding:0 4px;
-  margin:0;
-}
-.stats-pokemon {
-  padding: 20px 0;
-  border-width: 50px;
-  border-color: aqua;
-}
-.stats-pokemon ul li {
-  display: inline;
-  color:#fff;
-  padding: 0 10px;
-  font-size: 1.1em;
-  list-style: none;
-}
-#namepokemon {
-  font-size: 20px;
-}
-.legendary {
-  padding-bottom:10px;
-  animation: legendary 5s ease-in-out infinite;
-  background: linear-gradient(90deg,#ff0000,#ffd900,#00ff15,#05ffff,#001aff,#c300ff,#ff0062,#ff0000);  
-  background-size: 200% 200%;
-  background-clip:text ;
-  color: transparent;  
-}
-.not-legendary{
-    padding-bottom:10px;
-    color:#fff;
+    background: linear-gradient(135deg, #058, #069, #07a);
+    color: var(--text-white);
+    padding: 12px 24px;
+    border-radius: var(--border-radius-md);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
 }
 
-@keyframes bordershiny{
-   0%{height: 120px;}
-   50%{height: 150px;}
-   100%{height: 120px;}
-}
-@keyframes legendary {
-  0% { background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-@keyframes borderblue {
-  0% {
-    border-image-source: linear-gradient(
-      to top,
-      #024, 
-      #056, 
-      #066, 
-      #068, 
-      #069, 
-      #07a,
-      #07c, 
-      #09d, 
-      #0bf  
-    );
-    border-radius: 10px;
-  }
-
-  50% {
-    border-image-source: linear-gradient(
-      to top,
-      #0bf,
-      #09d, 
-      #07c,
-      #07a,
-      #069,
-      #068,
-      #066, 
-      #056,
-      #024    
-
-    );
-    border-radius: 10px;
-  }
-
-  100% {
-    border-image-source: linear-gradient(
-      to top,
-      #024, 
-      #056, 
-      #066, 
-      #068, 
-      #069, 
-      #07a,
-      #07c, 
-      #09d, 
-      #0bf   
-    );
-    border-radius: 10px;
-  }
-}
-@keyframes buttonpulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 5px 5px 30px #00f4;
-  }
-  10% {
-    transform: scale(1.05);
-    box-shadow: 5px 5px 10px #00f4;
-  }
-  20% {
-    transform: scale(1);
-    box-shadow: 5px 5px 30px #00f4;
-  }
-  30% {
-    transform: scale(1.05);
-    box-shadow: 5px 5px 10px #00f4;
-  }
-  40% {
-    transform: scale(1);
-    box-shadow: 5px 5px 30px #00f4;
-  }
-  50% {
-    transform: scale(1.05);
-    box-shadow: 5px 5px 10px #00f4;
-  }
-  60% {
-    transform: scale(1);
-    box-shadow: 5px 5px 30px #00f4;
-  }
-  70% {
-    transform: scale(1.05);
-    box-shadow: 5px 5px 10px #00f4;
-  }
-  80% {
-    transform: scale(1);
-    box-shadow: 5px 5px 30px #00f4;
-  }
-  90% {
-    transform: scale(1.05);
-    box-shadow: 5px 5px 10px #00f4;
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 5px 5px 30px #00f4;
-  }
-}
-@keyframes colortitle {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
+button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
 }
 
-@media (max-width: 768px) {
-  .container {
-    padding: 2em;
-    margin: 10px;
-  }
-
-  #TitleTeam {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-
-  .form {
-    margin: 0 10px;
-    padding: 1em;
-  }
-
-  .container-cards {
-    padding: 2em;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .card {
+button:hover::before {
+    width: 300px;
     height: 300px;
-    width: 180px;
-  }
+}
 
-  .container-center h1 {
-    font-size: 24px;
-  }
+button:hover {
+    background: linear-gradient(135deg, #069, #07a, #08b);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 25px rgba(0, 153, 255, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.2);
+    animation: buttonpulse ease-in-out 2s infinite;
+}
+
+button:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+button[type="button"] {
+    min-width: 120px;
+}
+
+.DeleteButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 6px 12px;
+    margin: 0;
+    font-size: 18px;
+    background: linear-gradient(135deg, #c00, #d00, #e00);
+    min-width: auto;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(204, 0, 0, 0.4);
+    transition: all var(--transition-speed) ease;
+}
+
+.DeleteButton:hover {
+    background: linear-gradient(135deg, #d00, #e00, #f00);
+    transform: scale(1.2) rotate(90deg);
+    box-shadow: 0 4px 20px rgba(255, 0, 0, 0.6);
+}
+
+/* =============================================
+   Pokémon Stats Section
+   ============================================= */
+.stats-pokemon {
+    padding: 20px 0;
+    border-width: 50px;
+    border-color: aqua;
+}
+
+.stats-pokemon ul li {
+    display: inline;
+    color: var(--text-white);
+    padding: 0 10px;
+    font-size: 1.1em;
+    list-style: none;
+}
+
+#namepokemon {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.legendary {
+    padding-bottom: 10px;
+    animation: legendary 5s ease-in-out infinite, legendaryGlow 2s ease-in-out infinite alternate;
+    background: linear-gradient(
+        90deg,
+        #ff0000, #ffd900, #00ff15, #05ffff, #001aff, #c300ff, #ff0062, #ff0000
+    );
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    font-weight: bold;
+}
+
+@keyframes legendaryGlow {
+    from { 
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.3), 0 0 20px rgba(255, 0, 0, 0.2);
+    }
+    to { 
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(0, 255, 255, 0.4), 0 0 40px rgba(255, 0, 255, 0.3);
+    }
+}
+
+.not-legendary {
+    padding-bottom: 10px;
+    color: var(--text-white);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    transition: text-shadow var(--transition-speed) ease;
+}
+
+.not-legendary:hover {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* =============================================
+   Animations
+   ============================================= */
+@keyframes bordershiny {
+    0% { height: 120px; transform: scale(1); }
+    50% { height: 150px; transform: scale(1.05); }
+    100% { height: 120px; transform: scale(1); }
+}
+
+@keyframes legendary {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes borderblue {
+    0% {
+        border-image-source: linear-gradient(
+            to top, #024, #056, #066, #068, #069, #07a, #07c, #09d, #0bf
+        );
+        border-radius: var(--border-radius-md);
+        box-shadow: var(--glow-blue);
+    }
+    50% {
+        border-image-source: linear-gradient(
+            to top, #0bf, #09d, #07c, #07a, #069, #068, #066, #056, #024
+        );
+        border-radius: var(--border-radius-md);
+        box-shadow: var(--glow-cyan);
+    }
+    100% {
+        border-image-source: linear-gradient(
+            to top, #024, #056, #066, #068, #069, #07a, #07c, #09d, #0bf
+        );
+        border-radius: var(--border-radius-md);
+        box-shadow: var(--glow-blue);
+    }
+}
+
+@keyframes buttonpulse {
+    0%, 20%, 40%, 60%, 80%, 100% {
+        transform: scale(1);
+        box-shadow: 5px 5px 30px rgba(0, 0, 255, 0.4), 0 0 20px rgba(0, 153, 255, 0.3);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: scale(1.05);
+        box-shadow: 5px 5px 10px rgba(0, 0, 255, 0.4), 0 0 30px rgba(0, 153, 255, 0.5);
+    }
+}
+
+@keyframes colortitle {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* =============================================
+   Responsive Design
+   ============================================= */
+@media (max-width: 768px) {
+    .container {
+        padding: 2em;
+        margin: 10px;
+    }
+
+    #TitleTeam {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .form {
+        margin: 0 10px;
+        padding: 1em;
+    }
+
+    .container-cards {
+        padding: 2em;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+        height: 300px;
+        width: 180px;
+    }
+
+    .container-center h1 {
+        font-size: 24px;
+    }
+    
+    .stats-pokemon ul li {
+        display: block;
+        margin: 5px 0;
+    }
 }
 
 @media (max-width: 480px) {
-  .container {
-    padding: 1em;
-  }
+    .container {
+        padding: 1em;
+    }
 
-  .form {
-    margin: 0 5px;
-  }
+    .form {
+        margin: 0 5px;
+    }
 
-  .container-cards {
-    padding: 1em;
-    grid-template-columns: 1fr;
-  }
+    .container-cards {
+        padding: 1em;
+        grid-template-columns: 1fr;
+    }
 
-  .card {
-    height: 250px;
-    width: 150px;
-  }
+    .card {
+        height: 250px;
+        width: 150px;
+    }
 
-  button {
-    font-size: 14px;
-    padding: 8px 16px;
-  }
+    button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
 
-  .container-center h1 {
-    font-size: 18px;
-  }
+    .container-center h1 {
+        font-size: 18px;
+    }
+}
+
+/* =============================================
+   Particle Effects (Optional Enhancement)
+   ============================================= */
+.particle {
+    position: absolute;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(0, 153, 255, 0.8), transparent);
+    border-radius: 50%;
+    animation: particleFloat 3s ease-out forwards;
+}
+
+@keyframes particleFloat {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100px) scale(0);
+    }
+}
+
+/* =============================================
+   Scrollbar Styling
+   ============================================= */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #058, #07a, #09c);
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #07a, #09c, #0bf);
+    box-shadow: 0 0 10px rgba(0, 153, 255, 0.5);
 }
